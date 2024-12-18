@@ -49,9 +49,9 @@ pip install -r requirements.txt
 2. `geoloc.py` sample commands. The arguments is a space-separate list of quoted strings, with any number of items:
 
 ```bash
-python3 geoloc.py "Los Angeles, CA"
-python3 geoloc.py "60091"
-python3 geoloc.py "60091" "Los Agneles, CA" "Chicago, IL" 
+python3 geoloc.py  -l "Los Angeles, CA"
+python3 geoloc.py -l "60091"
+python3 geoloc.py -l "60091" "Los Agneles, CA" "Chicago, IL" -v
 ```
 
 ## Testing
