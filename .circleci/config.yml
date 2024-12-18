@@ -1,0 +1,22 @@
+version: 2.1
+jobs:
+  run-tests:
+    machine: 
+      image: ubuntu-2204:current
+    steps:
+      - checkout
+      - run:
+          name: "Build Test Image"
+          command: |
+            ls
+            docker build -t geoloc-tests .
+      - run:
+          name: "Run Tests"
+          command: |
+            docker run geoloc-tests pytest tests/tests_direct.py 
+            docker run geoloc-tests pytest tests/tests_mocked.py 
+            docker run geoloc-tests pytest tests/tests_with_subprocess.py 
+workflows:
+  run-tests-workflow:
+    jobs:
+      - run-tests
