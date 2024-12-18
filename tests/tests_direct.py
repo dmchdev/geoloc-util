@@ -7,10 +7,7 @@ import geoloc
 from jsonschema import validate
 import subprocess
 
-# print(subprocess.run(["python3", "../geoloc.py", "-l", "60561", "Wilmette, IL"], check=True, stdout=PIPE).stdout)
-r = subprocess.check_output(
-    ["python3", "../geoloc.py", "-l", "60561", "Wilmette, IL"], text=True)
-print(r)
+
 def test_zip():
     schema = schemas.zipcode_response_schema 
     report = geoloc.process_locations(["60091"])
