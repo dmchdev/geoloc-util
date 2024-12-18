@@ -3,6 +3,9 @@ import requests
 import json
 import secrets
 
+# NOTE: normally, the secrets.API_KEY would not be included in the source code, especially of a public repository. 
+# The proper way to do is to store it in a secure place, such as a password manager or cloud secrets storage and
+# extract it programmatically. For example, CircleCI can be configured with a secret key env variable.
 
 def geolocation_by_city_state(city: str, state: str, country="US") -> dict:
     """

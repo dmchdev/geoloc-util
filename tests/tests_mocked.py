@@ -4,8 +4,12 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 import schemas
 import geoloc
 from jsonschema import validate
+import pytest
+import asyncio
+import pytest_asyncio
 
-def test_zip(mocker):
+@pytest.mark.asyncio
+async def test_zip(mocker):
     mock_data = {
         "zip": "12345",
         "name": "Schenectady",
@@ -22,7 +26,8 @@ def test_zip(mocker):
     validate(instance=report, schema=schema)
     assert(report[0]["zip"] == "12345")
 
-def test_single_word_city_state(mocker):
+@pytest.mark.asyncio
+async def test_single_word_city_state(mocker):
     mock_data = [{
         "name": "Chicago",
         "lat": 41.8755616,
@@ -40,7 +45,8 @@ def test_single_word_city_state(mocker):
     validate(instance=report, schema=schema)
     assert(report[0]["name"] == "Chicago")
 
-def test_multiple_word_city_state(mocker):
+@pytest.mark.asyncio
+async def test_multiple_word_city_state(mocker):
     mock_data = [{
         "name": "Los Angeles",
         "lat": 34.0536909,
@@ -58,7 +64,8 @@ def test_multiple_word_city_state(mocker):
     validate(instance=report, schema=schema)
     assert(report[0]["name"] == "Los Angeles")
 
-def test_missing_comma_city_state(mocker):
+@pytest.mark.asyncio
+async def test_missing_comma_city_state(mocker):
     mock_data = [{
         "name": "Wilmette",
         "lat": 42.0757315,
@@ -75,7 +82,8 @@ def test_missing_comma_city_state(mocker):
     validate(instance=report, schema=schema)
     assert(report[0]["name"] == "Wilmette")
 
-def test_missing_comma_multiple_word_city_state(mocker):
+@pytest.mark.asyncio
+async def test_missing_comma_multiple_word_city_state(mocker):
     mock_data = [{
         "name": "Los Angeles",
         "lat": 34.0536909,
@@ -93,7 +101,8 @@ def test_missing_comma_multiple_word_city_state(mocker):
     validate(instance=report, schema=schema)
     assert(report[0]["name"] == "Los Angeles")
 
-def test_multiple_locations(mocker):
+@pytest.mark.asyncio
+async def test_multiple_locations(mocker):
     city_state_data = {
         "name": "Los Angeles",
         "lat": 34.0536909,
@@ -121,12 +130,14 @@ def test_multiple_locations(mocker):
     assert(report[0]["name"] == "Los Angeles")
     assert(report[1]["zip"] == "60091")
 
-def test_zip_too_short():
+@pytest.mark.asyncio
+async def test_zip_too_short():
     # no external calls take place, so no mocking here
     report = geoloc.process_locations("6065")
     assert("Zipcode is too short or too long" in report[0])
 
-def test_zip_with_letters(mocker):
+@pytest.mark.asyncio
+async def test_zip_with_letters(mocker):
     mock_data = []
     mock_response = mocker.MagicMock()
     mock_response.status_code = 200
@@ -135,7 +146,8 @@ def test_zip_with_letters(mocker):
     report = geoloc.process_locations(["605b1"])
     assert(report[0] == [])
 
-def test_nonexistent_city(mocker):
+@pytest.mark.asyncio
+async def test_nonexistent_city(mocker):
     mock_data = []
     mock_response = mocker.MagicMock()
     mock_response.status_code = 200
@@ -143,8 +155,9 @@ def test_nonexistent_city(mocker):
     mocker.patch("requests.get", return_value=mock_response)
     report = geoloc.process_locations(["asdfdas, IL"])
     assert(report[0] == [])
-    
-def test_nonexistent_state(mocker):
+
+@pytest.mark.asyncio    
+async def test_nonexistent_state(mocker):
     mock_data = []
     mock_response = mocker.MagicMock()
     mock_response.status_code = 200
@@ -153,7 +166,8 @@ def test_nonexistent_state(mocker):
     report = geoloc.process_locations(["Chicago, TT"])
     assert(report[0] == [])
 
-def test_incorrect_city_state_combination(mocker):
+@pytest.mark.asyncio
+async def test_incorrect_city_state_combination(mocker):
     mock_data = []
     mock_response = mocker.MagicMock()
     mock_response.status_code = 200
