@@ -7,12 +7,12 @@ import secrets
 # The proper way to do is to store it in a secure place, such as a password manager or cloud secrets storage and
 # extract it programmatically. For example, CircleCI can be configured with a secret key env variable.
 
-def geolocation_by_city_state(city: str, state: str, country="US") -> dict:
+def geolocation_by_city_state(city: str, state: str, api_key: str, country="US") -> dict:
     """
     Obtain geolocation data by city and state. 
     """
     r = requests.get(
-        f"http://api.openweathermap.org/geo/1.0/direct?q={city},{state},{country}&appid={secrets.API_KEY}")
+        f"http://api.openweathermap.org/geo/1.0/direct?q={city},{state},{country}&appid={api_key}")
     if 400 <= r.status_code:
         return f"API returned error for this location ({city}, {state}). Response code {r.status_code}({r.reason}). "
     else:
@@ -22,18 +22,18 @@ def geolocation_by_city_state(city: str, state: str, country="US") -> dict:
             return r.json()
 
 
-def geolocation_by_zipcode(zipcode: str, country="US") -> dict:
+def geolocation_by_zipcode(zipcode: str, api_key: str, country="US") -> dict:
     """
     Obtain geolocation data by zipcode
     """
     r = requests.get(
-        f"http://api.openweathermap.org/geo/1.0/zip?zip={zipcode},{country}&appid={secrets.API_KEY}")
+        f"http://api.openweathermap.org/geo/1.0/zip?zip={zipcode},{country}&appid={api_key}")
     if 400 <= r.status_code:
         return f"API returned error for this location. Response code {r.status_code}({r.reason})"
     else:
         return r.json()
 
-def process_locations(locations: list, verbose = False) -> list:
+def process_locations(locations: list, api_key: str, verbose = False) -> list:
     """
     Processing each location item received from CLI and calling appropriate API request functions.
     Some user input errors have been covered
@@ -42,20 +42,20 @@ def process_locations(locations: list, verbose = False) -> list:
     for location in locations:
         if "," in location:
             location = location.split(",")
-            geolocation_data = geolocation_by_city_state(location[0].strip(), location[1].strip())
+            geolocation_data = geolocation_by_city_state(location[0].strip(), location[1].strip(), api_key)
         elif location.isdigit():
             if len(location) != 5:
                 geolocation_data = f"Zipcode is too short or too long: {location}"
             else:
-                geolocation_data = geolocation_by_zipcode(location)
+                geolocation_data = geolocation_by_zipcode(location, api_key)
         else:
             if " " in location:
                 arr = location.split()
                 state = arr[-1]
                 city = " ".join(arr[0:-1])
-                geolocation_data = geolocation_by_city_state(city, state)
+                geolocation_data = geolocation_by_city_state(city, state, api_key)
             else:
-                geolocation_data = geolocation_by_city_state(location, "")
+                geolocation_data = geolocation_by_city_state(location, "", api_key)
         if not verbose and geolocation_data and isinstance(geolocation_data, dict):
             geolocation_data = {k: v for k, v in geolocation_data.items() if k != "local_names"}
         report.append(geolocation_data)
@@ -69,6 +69,7 @@ def main():
     parser.add_argument(
         "-l", "--LOCATIONS",
         nargs="+",
+        required=True,
         help="""A single location or a space separated list of locations.
         Each "city, state_code"(e.g "Chicago, IL", comma is mandatory) location must be in quotes.
         Each zipcode location may be with or without quotes.
@@ -79,11 +80,15 @@ def main():
         action="store_true", 
         default=False, 
         help="Display full geolocation response with local_names included")
+    parser.add_argument(
+        "-apikey", "--API_KEY",
+        required=True,
+        help="Token to the Open Weather API")
     args = parser.parse_args()
     if not args.LOCATIONS:
         print("Please provide location(s)")
         return
-    report = process_locations(args.LOCATIONS, verbose=args.VERBOSE)
+    report = process_locations(args.LOCATIONS, args.API_KEY, verbose=args.VERBOSE,)
     print(json.dumps(report, indent=4, ensure_ascii=False))
     return report
 

@@ -44,14 +44,14 @@ pip install -r requirements.txt
 
 
 ## Usage
-1. The `geoloc.py` command-line utility has 2 arguments: `-l` (locations) and `-v` (verbose). Please examine `geoloc.py` file for  its `argparse` setup.
+1. The `geoloc.py` command-line utility has 3 arguments: `-l` (locations) `-apikey` and `-v` (verbose). Please examine `geoloc.py` file for  its `argparse` setup. Locations and apikey are required.
 
 2. `geoloc.py` sample commands. The arguments is a space-separate list of quoted strings, with any number of items:
 
 ```bash
-python3 geoloc.py  -l "Los Angeles, CA"
-python3 geoloc.py -l "60091"
-python3 geoloc.py -l "60091" "Los Agneles, CA" "Chicago, IL" -v
+python3 geoloc.py  -l "Los Angeles, CA" -apikey "apikeystring"
+python3 geoloc.py -l "60091" -apikey "apikeystring"
+python3 geoloc.py -l "60091" "Los Angeles, CA" "Chicago, IL" -apikey "apikeystring" -v
 ```
 
 ## Testing

@@ -13,9 +13,9 @@ jobs:
       - run:
           name: "Run Tests"
           command: |
-            docker run geoloc-tests pytest tests/tests_direct.py 
-            docker run geoloc-tests pytest tests/tests_mocked.py 
-            docker run geoloc-tests pytest tests/tests_with_subprocess.py 
+            docker run geoloc-tests pytest tests/tests_direct.py --apikey ${GEOLOC_API_KEY}
+            docker run geoloc-tests pytest tests/tests_mocked.py --apikey ${GEOLOC_API_KEY}
+            docker run geoloc-tests pytest tests/tests_with_subprocess.py --apikey ${GEOLOC_API_KEY}
 workflows:
   run-tests-workflow:
     jobs:
