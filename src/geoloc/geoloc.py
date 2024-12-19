@@ -69,6 +69,7 @@ def main():
     parser.add_argument(
         "-l", "--LOCATIONS",
         nargs="+",
+        required=True,
         help="""A single location or a space separated list of locations.
         Each "city, state_code"(e.g "Chicago, IL", comma is mandatory) location must be in quotes.
         Each zipcode location may be with or without quotes.
