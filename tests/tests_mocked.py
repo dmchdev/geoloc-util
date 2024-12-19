@@ -10,7 +10,7 @@ import pytest_asyncio
 
 # As this is all mocked, we don't have to use 'request' fixture here to get parameters,
 # could just use a random string for the api_key (as on LINE 29). I did this implementation 
-# solely for purposes of demonstration multiple fixtures usage in Pytest. 
+# solely for purposes of demonstrating multiple fixtures usage in Pytest. 
 @pytest.mark.asyncio
 async def test_zip(mocker, request):
     api_key = request.config.getoption("--apikey")
