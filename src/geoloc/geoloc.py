@@ -72,7 +72,7 @@ def main():
         help="""A single location or a space separated list of locations.
         Each "city, state_code"(e.g "Chicago, IL", comma is mandatory) location must be in quotes.
         Each zipcode location may be with or without quotes.
-        Example command: >>> python3 geoloc.py -l 60091 "Chicago, IL" "Los Angeles, CA" "12345"       
+        Example command: >>> python3 geoloc.py -l 60091 "Chicago, IL" "Los Angeles, CA" "12345" -apikey "apikeystring"       
         """)
     parser.add_argument(
         "-v", "--VERBOSE", 
