@@ -67,13 +67,15 @@ pytest tests/test_name.py
 ```
 3. You may also use Docker to build a docker image from the `Dockerfile` provided and run tests using Docker engine:
 
+4. Via the CircleCI pipeline as indicated below in CI Integration.
+
 ```bash
 docker build -t geoloc-tests .
 docker run geoloc-tests pytest tests/tests_name.py 
 ```
 ## CI Integration
 
-This project is integrated into a `CircleCI` pipeline, with tests running as a PR check, automatically upon branch commits (see `View Details` of any existing PR).
+This project is integrated into a `CircleCI` pipeline, with tests running as a PR check, automatically upon branch commits (see `View Details` of any existing PR). You may run tests by simply going to the CircleCI progect `geoloc-util` via `View Details` links provided by GitHub, selecting `main` branch and clicking `Trigger Pipeline` button at the top right corner. The results will appear in the `STEPS` tab of the run, `Run Tests` stage.
 
 ## Contributing
 
