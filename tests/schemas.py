@@ -1,3 +1,7 @@
+"""
+Schema definitions for validating API responses
+"""
+
 zipcode_response_schema = {
     "type": "array",
     "items": {

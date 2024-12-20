@@ -1,6 +1,6 @@
 import argparse
-import requests
 import json
+import requests
 
 """
 This application will produce geolocation data for either the "zipcode" or "city, state"
@@ -12,7 +12,7 @@ Usage examples:
 """
 # NOTE: normally, API_KEY would not be included in the source code, especially of a public
 # repository. The proper way to do is to store it in a secure place, such as a password manager
-# or cloud secrets storage and xtract it programmatically. For example, CircleCI can be 
+# or cloud secrets storage and xtract it programmatically. For example, CircleCI can be
 # configured with a secret key env variable.
 
 
@@ -73,6 +73,9 @@ def process_locations(locations: list, api_key: str, verbose = False) -> list:
 
 
 def main():
+    """
+    Main 
+    """
     parser = argparse.ArgumentParser(
         prog='geoloc.py',
         description="Provides geolocation data for both 'city, state_code' and by zipcode")

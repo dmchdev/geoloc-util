@@ -1,6 +1,12 @@
 import os
 
+"""
+Configuring pytest
+"""
 def pytest_addoption(parser):
+    """
+    Adding option to pytest command line
+    """
     parser.addoption(
         "--apikey",
         action="store",

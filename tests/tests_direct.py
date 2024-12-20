@@ -1,14 +1,14 @@
-
+import schemas
 import sys
 import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
-import schemas
-from geoloc import geoloc
 from jsonschema import validate
 import subprocess
 import pytest
 import asyncio
 import pytest_asyncio
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+from geoloc import geoloc
 
 @pytest.mark.asyncio
 async def test_zip(request):
@@ -77,7 +77,7 @@ async def test_nonexistent_city(request):
     report = geoloc.process_locations(["asdfdas, IL"], api_key)
     assert report[0] == []
 
-@pytest.mark.asyncio    
+@pytest.mark.asyncio
 async def test_nonexistent_state(request):
     api_key = request.config.getoption("--apikey")
     report = geoloc.process_locations(["Chicago, TT"], api_key)

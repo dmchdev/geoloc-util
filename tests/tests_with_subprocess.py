@@ -1,11 +1,12 @@
 import sys
 import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import schemas
 from jsonschema import validate
 import subprocess
 import json
 import platform
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 
 system = platform.system()
 

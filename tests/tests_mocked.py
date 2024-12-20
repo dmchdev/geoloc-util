@@ -1,12 +1,12 @@
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 import schemas
-from geoloc import geoloc
 from jsonschema import validate
 import pytest
 import asyncio
 import pytest_asyncio
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+from geoloc import geoloc
 
 # As this is all mocked, we don't have to use 'request' fixture here to get parameters,
 # could just use a random string for the api_key (as on LINE 29). I did this implementation 
