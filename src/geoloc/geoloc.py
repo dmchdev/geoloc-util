@@ -12,7 +12,7 @@ Usage examples:
 """
 # NOTE: normally, API_KEY would not be included in the source code, especially of a public
 # repository. The proper way to do is to store it in a secure place, such as a password manager
-# or cloud secrets storage and xtract it programmatically. For example, CircleCI can be 
+# or cloud secrets storage and xtract it programmatically. For example, CircleCI can be
 # configured with a secret key env variable.
 
 
