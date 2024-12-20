@@ -53,3 +53,4 @@ multiple_locations_schema = {
         ]
         }
     }
+    

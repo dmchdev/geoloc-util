@@ -2,9 +2,19 @@ import argparse
 import requests
 import json
 
-# NOTE: normally, API_KEY would not be included in the source code, especially of a public repository. 
-# The proper way to do is to store it in a secure place, such as a password manager or cloud secrets storage and
-# extract it programmatically. For example, CircleCI can be configured with a secret key env variable.
+"""
+This application will produce geolocation data for either the "zipcode" or "city, state"
+inputs, using Open Weather Geolocation API calls. 
+Usage examples:
+>> python3 geoloc.py -l "60091" "Los Angeles, CA" "Chicago, IL" -apikey "key"
+>> python3 geoloc.py -l "60091" -apikey "key"
+>> python3 geoloc.py -l "Wilmette, IL" -apikey
+"""
+# NOTE: normally, API_KEY would not be included in the source code, especially of a public
+# repository. The proper way to do is to store it in a secure place, such as a password manager
+# or cloud secrets storage and xtract it programmatically. For example, CircleCI can be 
+# configured with a secret key env variable.
+
 
 def geolocation_by_city_state(city: str, state: str, api_key: str, country="US") -> dict:
     """
@@ -13,7 +23,7 @@ def geolocation_by_city_state(city: str, state: str, api_key: str, country="US")
     r = requests.get(
         f"http://api.openweathermap.org/geo/1.0/direct?q={city},{state},{country}&appid={api_key}")
     if 400 <= r.status_code:
-        return f"API returned error for this location ({city}, {state}). Response code {r.status_code}({r.reason}). "
+        return f"API returned error for this location ({city}, {state}). Response code {r.status_code}({r.reason})"
     else:
         if r.json():
             return r.json()[0]
@@ -41,7 +51,8 @@ def process_locations(locations: list, api_key: str, verbose = False) -> list:
     for location in locations:
         if "," in location:
             location = location.split(",")
-            geolocation_data = geolocation_by_city_state(location[0].strip(), location[1].strip(), api_key)
+            geolocation_data = geolocation_by_city_state(
+                location[0].strip(), location[1].strip(), api_key)
         elif location.isdigit():
             if len(location) != 5:
                 geolocation_data = f"Zipcode is too short or too long: {location}"
@@ -72,12 +83,13 @@ def main():
         help="""A single location or a space separated list of locations.
         Each "city, state_code"(e.g "Chicago, IL", comma is mandatory) location must be in quotes.
         Each zipcode location may be with or without quotes.
-        Example command: >>> python3 geoloc.py -l 60091 "Chicago, IL" "Los Angeles, CA" "12345" -apikey "apikeystring"       
+        Example command:
+        >> python3 geoloc.py -l 60091 "Chicago, IL" "Los Angeles, CA" "12345" -apikey "apikeystring"      
         """)
     parser.add_argument(
-        "-v", "--VERBOSE", 
-        action="store_true", 
-        default=False, 
+        "-v", "--VERBOSE",
+        action="store_true",
+        default=False,
         help="Display full geolocation response with local_names included")
     parser.add_argument(
         "-apikey", "--API_KEY",
