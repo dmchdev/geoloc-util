@@ -75,7 +75,7 @@ docker run geoloc-tests pytest tests/tests_name.py
 ```
 ## CI Integration
 
-This project is integrated into a `CircleCI` pipeline, with tests running as a PR check, automatically upon branch commits (see `View Details` of any existing PR). If you were to have access to the pipeline, you may run tests by simply going to the CircleCI progect `geoloc-util` via `View Details` links provided by GitHub, selecting `main` branch and clicking `Trigger Pipeline` button at the top right corner. The results will appear in the `STEPS` tab of the run, `Run Tests` stage.
+This project is integrated into a `CircleCI` pipeline, with tests running as a PR check, automatically upon branch commits (see `View Details` of any existing PR). With proper access to the pipeline, tests can be run by simply going to the CircleCI progect `geoloc-util` via `View Details` links provided by GitHub, selecting `main` branch and clicking `Trigger Pipeline` button at the top right corner. The results will appear in the `STEPS` tab of the run, `Run Tests` stage.
 
 ## Contributing
 
