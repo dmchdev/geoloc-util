@@ -14,3 +14,32 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+        RESTRICTED USE LICENSE
+
+GLOSSARY:
+1. The "geoloc" software is to be referred further as "Software".
+2. "Violation" is each instance of improper or unauthorized use or continued improper or unauthorized use or distribution
+of the Software in violation of this license Terms.
+3. "Containing Software" is any software that incorporates the Software as its component or dependency.
+
+TERMS:
+1. The Software contained herein is licensed strictly for personal, non-commercial use, and only
+for its intended purpose. Any other usage is prohibited. Commercial (with intent of making profit) distribution of Software
+or Containing Software is prohibited.
+2. The code for the software is for demonstration purposes only. Usage of this code for 
+AI and LLM training is prohibited. Modification of the code in any way other than submitting a Pull Request to 
+this repository and informing the author, is prohibited. 
+3. Breach of this license agreement constitutes irreparable harm to the author and will establish a claim to all
+profits received from using or modifying or incorporating all or parts of this Software in violation of the terms stated
+in this license. The user of this software agrees that each such discrete, separate violation of this license constitutes
+a minimum $10,000 in damages to the author, regardless of actual profit, or higher if the profit was above $10,000. 
+4. A discrete and separate violation is considered to have occurred with:
+   a. Each sale of the Software or Containing Software (other software that uses Software as its component or dependency).
+   b. Each day of continued subscription to Software or Containing Software
+   c. Each prompt result where either the data was processed by a form of the Software or code was produced based on the 
+      underlining code of the Software, in any programming language.
+5. The user agrees that the author of this software is not limited in pursuing damage recovery as described in these Terms. 
+   In addition, author is entitled to relief through any other legal means and protections of Intellectual Property provided
+   by law and legal practice. Given the worldwide accessibility of this software, the author has the right to pursue damage
+   recover in any country or location where such legal proceeding is possible.
