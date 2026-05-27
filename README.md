@@ -86,4 +86,4 @@ Please make sure to update tests as appropriate.
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+Restricted use license, see LICENSE
